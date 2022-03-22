@@ -19,9 +19,19 @@ strFileName = Environ("USERPROFILE") & "\OneDrive - California State Teachers' R
 ChDrive Left(strFileName, 1)
 ChDir strFileName
 
-MsgBox "Select all Excel files in the relevant folder by holding CTRL, or clicking and dragging the mouse.  Then click 'Open' to add and merge files." & vbNewLine & vbNewLine & _
-"This should be a folder on your desktop with all the CalATERS files downloaded from SharePoint."
-    
+CarryOn = MsgBox("Select all Excel files in the relevant folder by holding CTRL, or clicking and dragging the mouse.  Then click 'Open' to add and merge files.  This wil add all sheets with the name 'Work pool' to one combined worksheet" & vbNewLine & vbNewLine & _
+"There should be a folder on your desktop with all the CalATERS files downloaded from SharePoint." & vbNewLine & vbNewLine & _
+"Make sure none of the CalATERS Excel files are open, or else the macro will error out, as Excel cannot open two workbooks with the same name." & vbNewLine & vbNewLine & _
+"Continue with the macro?", vbYesNo, "Continue?")
+
+If CarryOn = vbNo Then
+   MsgBox ("Macro cancelled by user.")
+   End
+End If
+
+
+   
+
         
 Call MergeExcelFiles
 Call Merge_Sheets
@@ -217,11 +227,13 @@ Sub MergeExcelFiles()
                     wbname = wbkSrcBook.Name
                      wbname2 = Left(wbname, Len(wbname) - 5)
                     ActiveSheet.Name = wbname2
-                    
-                    'hard code all formulas
-                    With ActiveSheet.UsedRange
-                     .Value = .Value
-                    End With
+
+
+                'hard code all formulas
+                '3/2/22 this is causing headers in Dec 2021 to break; commenting out line for now
+        '                    With ActiveSheet.UsedRange
+        '                         .Value = .Value
+        '                    End With
            
                     End If
                 Next

@@ -144,7 +144,8 @@ ThisWorkbook.ActiveSheet.Range("H" & lastrow2).Select
 '============LOOP THAT ADDS ROWS AND SUMIFS FORMULAS DEPENDING ON VALUES IN COUNTIF FORMULAS=========================================
 colNr = 2
 
-    For rowNr = 1 To c2.Rows.Count
+    'For rowNr = 1 To c2.Rows.Count
+    For rowNr = 1 To 10000
         'For colNr = c2.Column To c2.Columns.Count
             Set cell = Cells(rowNr, colNr)
             
@@ -181,9 +182,10 @@ For Each c In c2.Cells
                             c.Offset(, 6).Interior.ThemeColor = xlThemeColorAccent4
                             c.Offset(, 6).Interior.TintAndShade = 0.399975585192419
                             
+                            '3/3changed this from c[-5] to c[0] for SUMIFS first sum range part; pulling GER Amount instead of Amount due to corrections
                             'Grab amount from the CALATERS tab
                             c.Offset(, 6).FormulaR1C1 = _
-                            "=SUMIFS('" & ReconMonth & "_CalATERS Info'!C[-5],'" & ReconMonth & "_CalATERS Info'!C[-7],'1130_" & ReconMonth & "'!R[]C[-6],'" & ReconMonth & "_CalATERS Info'!C[-1],'1130_" & ReconMonth & "'!R[]C[18])"
+                            "=SUMIFS('" & ReconMonth & "_CalATERS Info'!C[0],'" & ReconMonth & "_CalATERS Info'!C[-7],'1130_" & ReconMonth & "'!R[]C[-6],'" & ReconMonth & "_CalATERS Info'!C[-1],'1130_" & ReconMonth & "'!R[]C[18])"
                             
                             
                             'Grab check # from the CALATERS tab
