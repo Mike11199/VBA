@@ -1,1 +1,1 @@
-Macros developed at work to automate Excel tasks and grab information from SAP.  Contains no confidential company information.
+Macros developed at work to automate Excel tasks and grab information from SAP.  Contains no confidential company information.  Added to GitHub with permission of manager for version control purposes. 
